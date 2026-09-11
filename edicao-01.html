@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)file:///C:/Users/pedro/Downloads/jornal-cristo-rei-template.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Jornal Cristo Rei</title>
+<style>
+
+  @page {
+    size: 148mm 210mm; /* A5 = folha A4 dobrada ao meio */
+    margin: 0;
+  }
+
+  :root{
+    --marrom-vinho: #7a2e20;
+    --verde-mato: #3c4f38;
+    --dourado: #a9812f;
+    --dourado-claro: #cdae66;
+    --creme: #f7f1e2;
+    --creme-escuro: #efe3c4;
+    --tinta: #211d16;
+    --cinza-nota: #6b6355;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0; padding:0;
+    font-family: "Liberation Serif", "Times New Roman", serif;
+    color: var(--tinta);
+    background:#ffffff;
+  }
+
+  .pagina{
+    width:148mm;
+    height:210mm;
+    position:relative;
+    overflow:hidden;
+    page-break-after: always;
+    background: var(--creme);
+  }
+  .pagina:last-child{ page-break-after: auto; }
+
+  /* ---------- utilidades tipográficas ---------- */
+  .nome-secao{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:11pt;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+  }
+  .filete{ height:1.4pt; background:var(--tinta); }
+  .filete-dourado{ height:1.6pt; background:var(--dourado); }
+  .filete-fina{ height:0.6pt; background:var(--tinta); opacity:.55; }
+
+  /* ================= CAPA ================= */
+  .capa{
+    background: var(--creme);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding: 10mm 12mm 8mm 12mm;
+  }
+  .capa .topo{
+    width:100%;
+    text-align:center;
+    font-size:8pt;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color:var(--verde-mato);
+    padding-bottom:3mm;
+  }
+  .capa .linha-topo{
+    width:100%; height:1pt; background:var(--verde-mato); margin-bottom:2mm;
+  }
+  .mancheta{
+    text-align:center;
+    margin: 4mm 0 2mm 0;
+  }
+  .mancheta .de{
+    font-family:"DejaVu Serif", serif;
+    font-size:11pt;
+    letter-spacing:6px;
+    color:var(--marrom-vinho);
+    text-transform:uppercase;
+  }
+  .mancheta h1{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:40pt;
+    line-height:0.95;
+    margin:1mm 0 0 0;
+    color:var(--tinta);
+    letter-spacing:1px;
+  }
+  .mancheta .sub{
+    font-style:italic;
+    font-size:10.5pt;
+    color:var(--verde-mato);
+    margin-top:2mm;
+  }
+  .brasao-capa{
+    width:66mm;
+    margin: 6mm 0 5mm 0;
+  }
+  .brasao-capa img{ width:100%; display:block; }
+
+  .info-edicao{
+    text-align:center;
+    font-size:9pt;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--tinta);
+    border-top:1pt solid var(--tinta);
+    border-bottom:1pt solid var(--tinta);
+    padding:2mm 0;
+    width:100%;
+    margin-bottom:6mm;
+  }
+
+  .chamadas{
+    width:100%;
+    background:var(--creme-escuro);
+    border:1pt solid var(--dourado);
+    padding:5mm 6mm;
+    margin-bottom:auto;
+  }
+  .chamadas .titulo-chamadas{
+    font-family:"DejaVu Serif",serif;
+    font-weight:bold;
+    font-size:9.5pt;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--marrom-vinho);
+    margin-bottom:2mm;
+  }
+  .chamadas ul{
+    margin:0; padding-left:4mm;
+    font-size:10pt;
+    line-height:1.55;
+  }
+  .chamadas li::marker{ color:var(--dourado); }
+
+  .rodape-capa{
+    width:100%;
+    text-align:center;
+    padding-top:5mm;
+  }
+  .rodape-capa .lema{
+    font-style:italic;
+    font-size:10pt;
+    color:var(--verde-mato);
+  }
+  .rodape-capa .endereco{
+    font-size:7.3pt;
+    color:var(--cinza-nota);
+    margin-top:1.5mm;
+    letter-spacing:.3px;
+  }
+
+  /* ================= PÁGINAS INTERNAS (cabeçalho/rodapé) ================= */
+  .interna{
+    padding: 10mm 12mm 10mm 12mm;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+  }
+  .cabecalho-interno{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding-bottom:1.5mm;
+    border-bottom:1.4pt solid var(--tinta);
+    margin-bottom:5mm;
+  }
+  .cabecalho-interno .marca{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:9.5pt;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--marrom-vinho);
+  }
+  .cabecalho-interno .secao-atual{
+    font-size:8pt;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--verde-mato);
+  }
+  .rodape-interno{
+    margin-top:auto;
+    padding-top:2mm;
+    border-top:0.6pt solid var(--tinta);
+    display:flex;
+    justify-content:space-between;
+    font-size:7.5pt;
+    color:var(--cinza-nota);
+    letter-spacing:.4px;
+  }
+
+  .corpo-interno{ flex:1; }
+
+  /* ---------- Editorial (pág. 2) ---------- */
+  .titulo-materia{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:19pt;
+    line-height:1.08;
+    color:var(--tinta);
+    margin:0 0 1mm 0;
+  }
+  .assinatura-materia{
+    font-size:8.3pt;
+    font-style:italic;
+    color:var(--verde-mato);
+    margin-bottom:4mm;
+  }
+  .colunas-2{
+    column-count:2;
+    column-gap:6mm;
+    column-rule:0.5pt solid var(--dourado-claro);
+    font-size:9.6pt;
+    line-height:1.48;
+    text-align:justify;
+    hyphens:auto;
+  }
+  .colunas-2 p{ margin:0 0 3mm 0; }
+  .capitular{
+    text-indent:0;
+  }
+  .capitular .capital{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:20pt;
+    color:var(--marrom-vinho);
+  }
+  .citacao-destaque{
+    break-inside:avoid;
+    margin:1mm 0 3mm 0;
+    padding:2.5mm 3mm;
+    background:var(--creme-escuro);
+    border-left:2.4pt solid var(--marrom-vinho);
+    font-style:italic;
+    font-size:9.6pt;
+    line-height:1.4;
+  }
+
+  /* ---------- páginas de matéria-modelo (pág. 3 e 4) ---------- */
+  .caixa-instrucao{
+    background:var(--creme-escuro);
+    border:0.75pt dashed var(--verde-mato);
+    padding:2.5mm 3.5mm;
+    font-size:8pt;
+    font-style:italic;
+    color:var(--verde-mato);
+    margin-bottom:3mm;
+  }
+  .foto-espaco{
+    width:100%;
+    height:38mm;
+    border:0.75pt dashed var(--cinza-nota);
+    background:repeating-linear-gradient(45deg, #eee6d3, #eee6d3 6px, #e6dabf 6px, #e6dabf 12px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:8pt;
+    color:var(--cinza-nota);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:3mm;
+    text-align:center;
+    padding:2mm;
+  }
+  .legenda-foto{
+    font-size:7.3pt;
+    font-style:italic;
+    color:var(--cinza-nota);
+    margin:-2mm 0 3mm 0;
+  }
+  .caixa-destaque-verde{
+    background:var(--verde-mato);
+    color:var(--creme);
+    padding:3mm 3.5mm;
+    font-size:9pt;
+    line-height:1.4;
+    margin:3mm 0;
+  }
+  .caixa-destaque-verde .rotulo{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:8.3pt;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--dourado-claro);
+    margin-bottom:1.5mm;
+    display:block;
+  }
+
+  /* ---------- avisos paroquiais (pág. 5) ---------- */
+  .lista-avisos{ font-size:9.3pt; }
+  .item-dia{
+    display:flex;
+    margin-bottom:3.4mm;
+    break-inside:avoid;
+  }
+  .item-dia .dia{
+    width:24mm;
+    flex-shrink:0;
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:9.2pt;
+    text-transform:uppercase;
+    color:#ffffff;
+    background:var(--marrom-vinho);
+    padding:1.6mm 2mm;
+    align-self:flex-start;
+    letter-spacing:.5px;
+  }
+  .item-dia:nth-child(even) .dia{ background:var(--verde-mato); }
+  .item-dia .atividades{
+    flex:1;
+    padding-left:3.5mm;
+    line-height:1.45;
+  }
+  .item-dia .atividades div{ margin-bottom:0.6mm; }
+  .item-dia .hora{
+    font-weight:bold;
+    color:var(--marrom-vinho);
+  }
+  .item-dia:nth-child(even) .hora{ color:var(--verde-mato); }
+
+  /* ================= CONTRACAPA ================= */
+  .contracapa{
+    background: var(--creme);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:14mm;
+    text-align:center;
+  }
+  .contracapa .brasao-mini{ width:34mm; margin-bottom:5mm; }
+  .contracapa .lema-final{
+    font-style:italic;
+    font-size:11pt;
+    color:var(--verde-mato);
+    margin-bottom:6mm;
+  }
+  .contracapa .caixa-contato{
+    border-top:1pt solid var(--dourado);
+    border-bottom:1pt solid var(--dourado);
+    padding:4mm 0;
+    width:100%;
+    margin-bottom:6mm;
+  }
+  .contracapa .caixa-contato .nome-centro{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:11pt;
+    letter-spacing:1px;
+    color:var(--marrom-vinho);
+    margin-bottom:2mm;
+  }
+  .contracapa .caixa-contato div{
+    font-size:8.6pt;
+    line-height:1.6;
+    color:var(--tinta);
+  }
+  .contracapa .redes{
+    font-size:8pt;
+    color:var(--cinza-nota);
+    letter-spacing:.3px;
+  }
+  .contracapa .participe{
+    background:var(--creme-escuro);
+    border:0.75pt dashed var(--verde-mato);
+    padding:3mm 4mm;
+    font-size:8.3pt;
+    font-style:italic;
+    color:var(--verde-mato);
+    margin-top:6mm;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ======================= PÁGINA 1 — CAPA ======================= -->
+<div class="pagina capa">
+  
+  
+
+  <div class="mancheta">
+    <div class="de">Jornal</div>
+    <h1>CRISTO&nbsp;REI</h1>
+    <div class="sub">Informativo do Centro de Estudos Ave Maria</div>
+  </div>
+
+  <div class="brasao-capa"><img src="./Jornal Cristo Rei_files/brasao.png" alt="Brasão do CEAM"></div>
+
+  <div class="info-edicao">Ano I &nbsp;·&nbsp; Edição nº 00 &nbsp;·&nbsp; Mês de 2026</div>
+
+  <div class="chamadas">
+    <div class="titulo-chamadas">Nesta edição</div>
+    <ul>
+      <li>Editorial — Entre a corda e o banquinho</li>
+      <li>Formação: espaço reservado para a matéria da edição</li>
+      <li>Vida do Centro: espaço reservado para notícias e fotos</li>
+      <li>Avisos paroquiais da semana</li>
+    </ul>
+  </div>
+
+  <div class="rodape-capa">
+    <div class="lema">Idem Velle et Idem Nolle</div>
+    <div class="endereco">Centro de Estudos Ave Maria — Paróquia Nossa Senhora da Conceição Aparecida — Alegrete/RS</div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 2 — EDITORIAL ======================= -->
+<div class="pagina">
+  <div class="interna">
+    <div class="cabecalho-interno">
+      <div class="marca">Jornal Cristo Rei</div>
+      <div class="secao-atual">Editorial</div>
+    </div>
+
+    <div class="corpo-interno">
+      <h2 class="titulo-materia">Entre a corda e o banquinho</h2>
+      <div class="assinatura-materia">Editorial</div>
+
+      <div class="colunas-2">
+        <p class="capitular"><span class="capital">V</span>ivemos em um país e em um mundo sem Deus, que o pessoal chama de LAICO. “Estado laico” parece bastante democrático, mas na verdade é um Estado que escolheu a apostasia, isto é, afastar-se de Deus.</p>
+
+        <p>Em nome da falácia de “todas as religiões são boas” se escolheu por nenhuma, ou antes, negou-se Deus, negou-se a Trindade, negou-se o Cristo e negou-se a Cruz.</p>
+
+        <p>Negando a Cruz, nega-se o sofrimento humano, tão santo e purificador, porque Cristo disse: “quem não carrega a sua cruz e não me segue não pode ser meu discípulo” (Lucas 14-27).</p>
+
+        <div class="citacao-destaque">“Quem não carrega a sua cruz e não me segue não pode ser meu discípulo.”<br>— Lucas 14, 27</div>
+
+        <p>Se não se aceita o sofrimento e não se quer carregar a própria cruz e, por outro lado, nem tudo — ou quase nada — é alegria neste vale de lágrimas, então só restará o desespero, só resta o caos, só resta culpar a vida e extingui-la.</p>
+
+        <p>Ou voltamos a nossas faces a Deus e abraçamos com alegria a nossa cruz, ou restar-nos-á a penúria e a morte.</p>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <span>Centro de Estudos Ave Maria</span>
+      <span>2</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 3 — MODELO DE MATÉRIA (FORMAÇÃO) ======================= -->
+<div class="pagina">
+  <div class="interna">
+    <div class="cabecalho-interno">
+      <div class="marca">Jornal Cristo Rei</div>
+      <div class="secao-atual">Formação</div>
+    </div>
+
+    <div class="corpo-interno">
+      <div class="caixa-instrucao">Modelo de página — substitua este bloco pelo título, autor e texto da matéria de formação desta edição.</div>
+
+      <h2 class="titulo-materia">Título da matéria de formação</h2>
+      <div class="assinatura-materia">Por [nome do autor] — Centro de Estudos Ave Maria</div>
+
+      <div class="colunas-2">
+        <p>[Insira aqui o texto da matéria de formação: catequese, história da Igreja, vida de santos ou comentário bíblico. Recomenda-se de 350 a 450 palavras para preencher esta página.]</p>
+        <div class="caixa-destaque-verde"><span class="rotulo">Você sabia?</span>[Espaço para uma curiosidade, citação de catecismo ou dado histórico relacionado ao tema da matéria.]</div>
+        <p>[Continue o texto aqui. Ao final, pode-se indicar uma leitura complementar ou uma pergunta para reflexão do leitor.]</p>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <span>3</span>
+      <span>Centro de Estudos Ave Maria</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 4 — MODELO DE MATÉRIA (VIDA DO CENTRO) ======================= -->
+<div class="pagina">
+  <div class="interna">
+    <div class="cabecalho-interno">
+      <div class="marca">Jornal Cristo Rei</div>
+      <div class="secao-atual">Vida do Centro</div>
+    </div>
+
+    <div class="corpo-interno">
+      <div class="caixa-instrucao">Modelo de página — use este espaço para notícias, cobertura de eventos, atividades do CEAM ou depoimentos.</div>
+
+      <h2 class="titulo-materia">Título da notícia ou evento</h2>
+      <div class="assinatura-materia">Redação — Centro de Estudos Ave Maria</div>
+
+      <div class="foto-espaco">Espaço reservado para fotografia</div>
+      <div class="legenda-foto">Legenda da fotografia.</div>
+
+      <div class="colunas-2">
+        <p>[Insira aqui o relato do evento, atividade ou notícia do Centro de Estudos Ave Maria. Descreva o que aconteceu, quem participou e qual o próximo passo ou convite aos leitores.]</p>
+        <p>[Se desejar, inclua aqui um depoimento curto de um participante, entre aspas, com o nome ao final.]</p>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <span>4</span>
+      <span>Centro de Estudos Ave Maria</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 5 — AVISOS PAROQUIAIS ======================= -->
+<div class="pagina">
+  <div class="interna">
+    <div class="cabecalho-interno">
+      <div class="marca">Jornal Cristo Rei</div>
+      <div class="secao-atual">Avisos Paroquiais</div>
+    </div>
+
+    <div class="corpo-interno">
+      <h2 class="titulo-materia" style="font-size:16pt;">Agenda da semana</h2>
+      <div class="assinatura-materia">Paróquia Nossa Senhora da Conceição Aparecida</div>
+
+      <div class="lista-avisos">
+        <div class="item-dia">
+          <div class="dia">Segunda</div>
+          <div class="atividades"><div>Curso de História da Igreja — CEAM, Sala de Maria</div></div>
+        </div>
+        <div class="item-dia">
+          <div class="dia">Terça</div>
+          <div class="atividades"><div><span class="hora">19h</span> — Missa na Matriz</div></div>
+        </div>
+        <div class="item-dia">
+          <div class="dia">Quarta</div>
+          <div class="atividades"><div><span class="hora">19h</span> — Grupo de Oração da RCC</div></div>
+        </div>
+        <div class="item-dia">
+          <div class="dia">Quinta</div>
+          <div class="atividades">
+            <div><span class="hora">7h30</span> — Terço dos Homens</div>
+            <div><span class="hora">8h às 15h30</span> — Adoração ao SS. Sacramento</div>
+            <div><span class="hora">9h às 10h30</span> — Atendimento de confissões</div>
+            <div><span class="hora">15h30</span> — Atendimento de confissões</div>
+            <div><span class="hora">16h</span> — Missa na Matriz</div>
+          </div>
+        </div>
+        <div class="item-dia">
+          <div class="dia">Sexta</div>
+          <div class="atividades">
+            <div><span class="hora">19h</span> — Missa na Com. Sagrado Coração de Jesus, Vila Nova</div>
+            <div><span class="hora">19h</span> — Terço dos Jovens Emaús</div>
+          </div>
+        </div>
+        <div class="item-dia">
+          <div class="dia">Sábado</div>
+          <div class="atividades"><div><span class="hora">19h</span> — Missa na Matriz</div></div>
+        </div>
+        <div class="item-dia">
+          <div class="dia">Domingo</div>
+          <div class="atividades">
+            <div><span class="hora">9h</span> — Missa na Matriz</div>
+            <div><span class="hora">10h30</span> — Missa na Com. Nossa Senhora de Lourdes</div>
+            <div><span class="hora">19h</span> — Missa na Matriz</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <span>Centro de Estudos Ave Maria</span>
+      <span>5</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 6 — CONTRACAPA ======================= -->
+<div class="pagina contracapa">
+  <div class="brasao-mini"><img src="./Jornal Cristo Rei_files/brasao.png" alt="Brasão do CEAM" style="width:100%;"></div>
+  <div class="lema-final">“Idem Velle et Idem Nolle”</div>
+
+  <div class="caixa-contato">
+    <div class="nome-centro">Centro de Estudos Ave Maria</div>
+    <div>
+      Paróquia Nossa Senhora da Conceição Aparecida<br>
+      Alegrete — Rio Grande do Sul<br>
+      [Endereço] &nbsp;•&nbsp; [Telefone] &nbsp;•&nbsp; [E-mail]
+    </div>
+  </div>
+
+  <div class="redes">[@instagram do CEAM] &nbsp;·&nbsp; [Facebook da Paróquia]</div>
+
+  <div class="participe">Participe: os cursos e encontros do Centro de Estudos Ave Maria são abertos a toda a comunidade paroquial.</div>
+</div>
+
+
+
+</body></html>
