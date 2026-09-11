@@ -1,9 +1,38 @@
 <!DOCTYPE html>
-<!-- saved from url=(0064)file:///C:/Users/pedro/Downloads/jornal-cristo-rei-template.html -->
-<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
 <title>Jornal Cristo Rei</title>
+<meta name="edicao:numero" content="Edição nº 00 — Ano I">
+<meta name="edicao:titulo" content="Entre a corda e o banquinho">
+<meta name="edicao:data" content="Mês de 2026">
+<meta name="edicao:capa" content="assets/capa-edicao-01.png">
 <style>
+
+  @font-face{
+    font-family:"Utopia";
+    src: url("../assets/fontes/Utopia-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face{
+    font-family:"Utopia";
+    src: url("../assets/fontes/Utopia-Bold.otf") format("opentype");
+    font-weight: bold;
+    font-style: normal;
+  }
+  @font-face{
+    font-family:"Utopia";
+    src: url("../assets/fontes/Utopia-Italic.otf") format("opentype");
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face{
+    font-family:"Utopia";
+    src: url("../assets/fontes/Utopia-BoldItalic.otf") format("opentype");
+    font-weight: bold;
+    font-style: italic;
+  }
 
   @page {
     size: 148mm 210mm; /* A5 = folha A4 dobrada ao meio */
@@ -98,11 +127,11 @@
     color:var(--verde-mato);
     margin-top:2mm;
   }
-  .brasao-capa{
+  .CristoRei-capa{
     width:66mm;
     margin: 6mm 0 5mm 0;
   }
-  .brasao-capa img{ width:100%; display:block; }
+  .CristoRei-capa img{ width:100%; display:block; }
 
   .info-edicao{
     text-align:center;
@@ -338,7 +367,8 @@
     padding:14mm;
     text-align:center;
   }
-  .contracapa .brasao-mini{ width:34mm; margin-bottom:5mm; }
+  .contracapa .brasao-mini,
+  .contracapa .brasao-cocapa{ width:70mm; margin-bottom:5mm; }
   .contracapa .lema-final{
     font-style:italic;
     font-size:11pt;
@@ -380,22 +410,95 @@
     margin-top:6mm;
   }
 
+  /* ---------- passagem bíblica (pág. 3) ---------- */
+  .titulo-biblia{
+    font-family:"Utopia","DejaVu Serif",serif;
+    font-weight:bold;
+    font-size:18pt;
+    text-align:center;
+    margin:0 0 1mm 0;
+    color:var(--tinta);
+  }
+  .ref-biblia{
+    font-family:"Utopia","Georgia",serif;
+    font-style:italic;
+    text-align:center;
+    font-size:9.5pt;
+    color:var(--verde-mato);
+    margin-bottom:4mm;
+  }
+  .corpo-biblia{
+    font-family:"Utopia","Georgia","Liberation Serif",serif;
+    column-count:2;
+    column-gap:7mm;
+    column-rule:0.5pt solid var(--dourado-claro);
+  }
+  .corpo-biblia .versiculo-abertura{
+    margin:0 0 2.5mm 0;
+    text-align:justify;
+    font-size:13pt;
+    line-height:14pt;
+    break-inside:avoid;
+  }
+  .corpo-biblia .numero-capitulo{
+    font-weight:bold;
+    font-size:30pt;
+    line-height:0.7;
+    float:left;
+    padding-right:2mm;
+    color:var(--marrom-vinho);
+  }
+  .corpo-biblia .numero-versiculo{
+    font-weight:bold;
+    font-size:13pt;
+    padding-right:1mm;
+    color:var(--tinta);
+  }
+  .corpo-biblia .versiculo-prosa{
+    margin:0 0 2.5mm 0;
+    text-align:justify;
+    font-size:13pt;
+    line-height:14pt;
+    break-inside:avoid;
+  }
+  .corpo-biblia .versiculo-poesia{
+    font-size:13pt;
+    line-height:14pt;
+    margin:0 0 2mm 0;
+    break-inside:avoid;
+  }
+  .corpo-biblia .versiculo-poesia .linha-a{ display:inline; margin-left:0; }
+  .corpo-biblia .versiculo-poesia .linha-b{ display:block; margin-left:6mm; margin-top:0.5mm; }
+
+  .notas-rodape-biblia{
+    font-family:"Utopia","Georgia",serif;
+    font-size:8pt;
+    line-height:1.5;
+    color:var(--cinza-nota);
+    font-style:italic;
+    margin-top:3mm;
+    padding-top:2mm;
+    border-top:0.5pt solid var(--cinza-nota);
+  }
+  .notas-rodape-biblia .ref-nota{
+    font-weight:bold;
+    font-style:normal;
+    margin-right:1mm;
+  }
+
 </style>
 </head>
 <body>
 
 <!-- ======================= PÁGINA 1 — CAPA ======================= -->
 <div class="pagina capa">
-  
-  
-
   <div class="mancheta">
     <div class="de">Jornal</div>
     <h1>CRISTO&nbsp;REI</h1>
     <div class="sub">Informativo do Centro de Estudos Ave Maria</div>
   </div>
 
-  <div class="brasao-capa"><img src="../assets/cristorei.png" alt="Brasão do CEAM"></div>
+  <div class="CristoRei-capa"><img src="../assets/cristorei.png" alt="imagem Cristo Rei"></div>
 
   <div class="info-edicao">Ano I &nbsp;·&nbsp; Edição nº 00 &nbsp;·&nbsp; Mês de 2026</div>
 
@@ -403,7 +506,7 @@
     <div class="titulo-chamadas">Nesta edição</div>
     <ul>
       <li>Editorial — Entre a corda e o banquinho</li>
-      <li>Formação: espaço reservado para a matéria da edição</li>
+      <li>Palavra de Deus — Eclesiastes 3</li>
       <li>Vida do Centro: espaço reservado para notícias e fotos</li>
       <li>Avisos paroquiais da semana</li>
     </ul>
@@ -449,24 +552,75 @@
   </div>
 </div>
 
-<!-- ======================= PÁGINA 3 — MODELO DE MATÉRIA (FORMAÇÃO) ======================= -->
+<!-- ======================= PÁGINA 3 — PALAVRA DE DEUS ======================= -->
 <div class="pagina">
   <div class="interna">
     <div class="cabecalho-interno">
       <div class="marca">Jornal Cristo Rei</div>
-      <div class="secao-atual">Formação</div>
+      <div class="secao-atual">Palavra de Deus</div>
     </div>
 
     <div class="corpo-interno">
-      <div class="caixa-instrucao">Modelo de página — substitua este bloco pelo título, autor e texto da matéria de formação desta edição.</div>
+      <h2 class="titulo-biblia">Um tempo para cada coisa</h2>
+      <div class="ref-biblia">Eclesiastes 3, 1-8</div>
 
-      <h2 class="titulo-materia">Título da matéria de formação</h2>
-      <div class="assinatura-materia">Por [nome do autor] — Centro de Estudos Ave Maria</div>
+      <div class="corpo-biblia">
 
-      <div class="colunas-2">
-        <p>[Insira aqui o texto da matéria de formação: catequese, história da Igreja, vida de santos ou comentário bíblico. Recomenda-se de 350 a 450 palavras para preencher esta página.]</p>
-        <div class="caixa-destaque-verde"><span class="rotulo">Você sabia?</span>[Espaço para uma curiosidade, citação de catecismo ou dado histórico relacionado ao tema da matéria.]</div>
-        <p>[Continue o texto aqui. Ao final, pode-se indicar uma leitura complementar ou uma pergunta para reflexão do leitor.]</p>
+        <p class="versiculo-abertura"><span class="numero-capitulo">3</span><span class="numero-versiculo">1</span>Para tudo há um tempo, para cada coisa há um momento debaixo do céu:</p>
+
+        <div class="versiculo-poesia">
+          <span class="numero-versiculo">2</span><span class="linha-a">tempo de nascer</span>
+          <span class="linha-b">e tempo de morrer;</span>
+          <span class="linha-a">tempo de plantar</span>
+          <span class="linha-b">e tempo de arrancar o que se plantou.</span>
+        </div>
+
+        <div class="versiculo-poesia">
+          <span class="numero-versiculo">3</span><span class="linha-a">Tempo de matar</span>
+          <span class="linha-b">e tempo de curar;</span>
+          <span class="linha-a">tempo de demolir</span>
+          <span class="linha-b">e tempo de construir.</span>
+        </div>
+
+        <div class="versiculo-poesia">
+          <span class="numero-versiculo">4</span><span class="linha-a">Tempo de chorar</span>
+          <span class="linha-b">e tempo de rir;</span>
+          <span class="linha-a">tempo de gemer</span>
+          <span class="linha-b">e tempo de dançar.</span>
+        </div>
+
+        <div class="versiculo-poesia">
+          <span class="numero-versiculo">5</span><span class="linha-a">Tempo de atirar pedras</span>
+          <span class="linha-b">e tempo de ajuntá-las;</span>
+          <span class="linha-a">tempo de abraçar</span>
+          <span class="linha-b">e tempo de apartar-se.</span>
+        </div>
+
+        <div class="versiculo-poesia">
+          <span class="numero-versiculo">6</span><span class="linha-a">Tempo de procurar</span>
+          <span class="linha-b">e tempo de perder;</span>
+          <span class="linha-a">tempo de guardar</span>
+          <span class="linha-b">e tempo de jogar fora.</span>
+        </div>
+
+        <div class="versiculo-poesia">
+          <span class="numero-versiculo">7</span><span class="linha-a">Tempo de rasgar</span>
+          <span class="linha-b">e tempo de costurar;</span>
+          <span class="linha-a">tempo de calar</span>
+          <span class="linha-b">e tempo de falar.</span>
+        </div>
+
+        <div class="versiculo-poesia">
+          <span class="numero-versiculo">8</span><span class="linha-a">Tempo de amar</span>
+          <span class="linha-b">e tempo de odiar;</span>
+          <span class="linha-a">tempo de guerra</span>
+          <span class="linha-b">e tempo de paz.</span>
+        </div>
+
+      </div>
+
+      <div class="notas-rodape-biblia">
+        <span class="ref-nota">3,5.</span> Ajuntá-las: sentido difícil; a esclarecer talvez pelo contexto.
       </div>
     </div>
 
@@ -573,7 +727,7 @@
 
 <!-- ======================= PÁGINA 6 — CONTRACAPA ======================= -->
 <div class="pagina contracapa">
-  <div class="brasao-mini"><img src="./Jornal Cristo Rei_files/brasao.png" alt="Brasão do CEAM" style="width:100%;"></div>
+  <div class="brasao-mini"><img src="../assets/brasao.svg" alt="Brasão do CEAM" style="width:100%;"></div>
   <div class="lema-final">“Idem Velle et Idem Nolle”</div>
 
   <div class="caixa-contato">
