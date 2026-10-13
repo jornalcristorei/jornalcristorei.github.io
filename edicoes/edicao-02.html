@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Jornal Cristo Rei</title>
+<meta name="edicao:numero" content="Edição nº 02 — Ano I">
+<meta name="edicao:titulo" content="O HOMEM INTERIOR">
+<meta name="edicao:data" content="Alegrete, Outubro de 2026">
+<meta name="edicao:capa" content="../assets/cristorei.png">
+<style>
+
+  @font-face{
+    font-family:"Utopia";
+    src: url("../assets/fontes/Utopia-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face{
+    font-family:"Utopia";
+    src: url("../assets/fontes/Utopia-Bold.otf") format("opentype");
+    font-weight: bold;
+    font-style: normal;
+  }
+  @font-face{
+    font-family:"Utopia";
+    src: url("../assets/fontes/Utopia-Italic.otf") format("opentype");
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face{
+    font-family:"Utopia";
+    src: url("../assets/fontes/Utopia-BoldItalic.otf") format("opentype");
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  @page {
+    size: 148mm 210mm; /* A5 = folha A4 dobrada ao meio */
+    margin: 0;
+  }
+
+  :root{
+    --marrom-vinho: #7a2e20;
+    --verde-mato: #3c4f38;
+    --dourado: #a9812f;
+    --dourado-claro: #cdae66;
+    --creme: #f7f1e2;
+    --creme-escuro: #efe3c4;
+    --tinta: #211d16;
+    --cinza-nota: #6b6355;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0; padding:0;
+    font-family: "Liberation Serif", "Times New Roman", serif;
+    color: var(--tinta);
+    background:#ffffff;
+  }
+
+  .pagina{
+    width:148mm;
+    height:210mm;
+    position:relative;
+    overflow:hidden;
+    page-break-after: always;
+    background: var(--creme);
+  }
+  .pagina:last-child{ page-break-after: auto; }
+
+  /* ---------- utilidades tipográficas ---------- */
+  .nome-secao{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:11pt;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+  }
+  .filete{ height:1.4pt; background:var(--tinta); }
+  .filete-dourado{ height:1.6pt; background:var(--dourado); }
+  .filete-fina{ height:0.6pt; background:var(--tinta); opacity:.55; }
+
+  /* ================= CAPA ================= */
+  .capa{
+    background: var(--creme);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding: 10mm 12mm 8mm 12mm;
+  }
+  .capa .topo{
+    width:100%;
+    text-align:center;
+    font-size:8pt;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color:var(--verde-mato);
+    padding-bottom:3mm;
+  }
+  .capa .linha-topo{
+    width:100%; height:1pt; background:var(--verde-mato); margin-bottom:2mm;
+  }
+  .mancheta{
+    text-align:center;
+    margin: 4mm 0 2mm 0;
+  }
+  .mancheta .de{
+    font-family:"DejaVu Serif", serif;
+    font-size:11pt;
+    letter-spacing:6px;
+    color:var(--marrom-vinho);
+    text-transform:uppercase;
+  }
+  .mancheta h1{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:40pt;
+    line-height:0.95;
+    margin:1mm 0 0 0;
+    color:var(--tinta);
+    letter-spacing:1px;
+  }
+  .mancheta .sub{
+    font-style:italic;
+    font-size:10.5pt;
+    color:var(--verde-mato);
+    margin-top:2mm;
+  }
+  .CristoRei-capa{
+    width:66mm;
+    margin: 6mm 0 5mm 0;
+  }
+  .CristoRei-capa img{ width:100%; display:block; }
+
+  .info-edicao{
+    text-align:center;
+    font-size:9pt;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--tinta);
+    border-top:1pt solid var(--tinta);
+    border-bottom:1pt solid var(--tinta);
+    padding:2mm 0;
+    width:100%;
+    margin-bottom:6mm;
+  }
+
+  .chamadas{
+    width:100%;
+    background:var(--creme-escuro);
+    border:1pt solid var(--dourado);
+    padding:4mm 5.5mm 3.5mm 5.5mm;
+    margin-bottom:2mm;
+  }
+  .chamadas .titulo-chamadas{
+    font-family:"DejaVu Serif",serif;
+    font-weight:bold;
+    font-size:9.5pt;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--marrom-vinho);
+    margin-bottom:2mm;
+  }
+  .chamadas ul{
+    margin:0; padding-left:4mm;
+    font-size:9.3pt;
+    line-height:1.35;
+    text-transform:uppercase;
+  }
+  .chamadas li::marker{ color:var(--dourado); }
+
+  .rodape-capa{
+    width:100%;
+    text-align:center;
+    padding-top:5mm;
+  }
+  .rodape-capa .lema{
+    font-style:italic;
+    font-size:10pt;
+    color:var(--verde-mato);
+  }
+  .rodape-capa .endereco{
+    font-size:7.3pt;
+    color:var(--cinza-nota);
+    margin-top:1.5mm;
+    letter-spacing:.3px;
+  }
+
+  /* ================= PÁGINAS INTERNAS (cabeçalho/rodapé) ================= */
+  .interna{
+    padding: 10mm 12mm 10mm 12mm;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+  }
+  .cabecalho-interno{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding-bottom:1.5mm;
+    border-bottom:1.4pt solid var(--tinta);
+    margin-bottom:5mm;
+  }
+  .cabecalho-interno .marca{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:9.5pt;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--marrom-vinho);
+  }
+  .cabecalho-interno .secao-atual{
+    font-size:8pt;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--verde-mato);
+  }
+  .rodape-interno{
+    margin-top:auto;
+    padding-top:2mm;
+    border-top:0.6pt solid var(--tinta);
+    display:flex;
+    justify-content:space-between;
+    font-size:7.5pt;
+    color:var(--cinza-nota);
+    letter-spacing:.4px;
+  }
+
+  .corpo-interno{ flex:1; }
+
+  /* ---------- Editorial (pág. 2) ---------- */
+  .titulo-materia{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:20.5pt;
+    line-height:1.05;
+    color:var(--tinta);
+    margin:0 0 0.8mm 0;
+  }
+  .assinatura-materia{
+    font-size:8.7pt;
+    font-style:italic;
+    color:var(--verde-mato);
+    margin-bottom:3mm;
+  }
+  .colunas-2{
+    column-count:2;
+    column-gap:5.5mm;
+    column-rule:0.5pt solid var(--dourado-claro);
+    font-size:11pt;
+    line-height:15.5pt;
+    text-align:justify;
+    hyphens:auto;
+  }
+  .colunas-2 p{
+    margin:0 0 2mm 0;
+    text-indent:4mm;
+  }
+  .colunas-2 p:first-child{ text-indent:0; }
+  .capitular{
+    text-indent:0;
+  }
+  .capitular .capital{
+    float:left;
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:30pt;
+    line-height:.72;
+    padding-right:1.5mm;
+    color:var(--marrom-vinho);
+  }
+  .citacao-destaque{
+    break-inside:avoid;
+    margin:1mm 0 2.5mm 0;
+    padding:2.3mm 3mm;
+    background:var(--creme-escuro);
+    border-left:2.4pt solid var(--marrom-vinho);
+    font-style:italic;
+    font-size:10pt;
+    line-height:1.35;
+  }
+
+  /* ---------- páginas de matéria-modelo (pág. 3 e 4) ---------- */
+  .caixa-instrucao{
+    background:var(--creme-escuro);
+    border:0.75pt dashed var(--verde-mato);
+    padding:2.5mm 3.5mm;
+    font-size:8pt;
+    font-style:italic;
+    color:var(--verde-mato);
+    margin-bottom:3mm;
+  }
+  .foto-espaco{
+    width:100%;
+    height:38mm;
+    border:0.75pt dashed var(--cinza-nota);
+    background:repeating-linear-gradient(45deg, #eee6d3, #eee6d3 6px, #e6dabf 6px, #e6dabf 12px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:8pt;
+    color:var(--cinza-nota);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:3mm;
+    text-align:center;
+    padding:2mm;
+  }
+  .legenda-foto{
+    font-size:7.3pt;
+    font-style:italic;
+    color:var(--cinza-nota);
+    margin:-2mm 0 3mm 0;
+  }
+  .caixa-destaque-verde{
+    background:var(--verde-mato);
+    color:var(--creme);
+    padding:3mm 3.5mm;
+    font-size:9pt;
+    line-height:1.4;
+    margin:3mm 0;
+  }
+  .caixa-destaque-verde .rotulo{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:8.3pt;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--dourado-claro);
+    margin-bottom:1.5mm;
+    display:block;
+  }
+
+  /* ---------- avisos paroquiais (pág. 5) ---------- */
+  .lista-avisos{ font-size:9.3pt; }
+  .item-dia{
+    display:flex;
+    margin-bottom:3.4mm;
+    break-inside:avoid;
+  }
+  .item-dia .dia{
+    width:24mm;
+    flex-shrink:0;
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:9.2pt;
+    text-transform:uppercase;
+    color:#ffffff;
+    background:var(--marrom-vinho);
+    padding:1.6mm 2mm;
+    align-self:flex-start;
+    letter-spacing:.5px;
+  }
+  .item-dia:nth-child(even) .dia{ background:var(--verde-mato); }
+  .item-dia .atividades{
+    flex:1;
+    padding-left:3.5mm;
+    line-height:1.45;
+  }
+  .item-dia .atividades div{ margin-bottom:0.6mm; }
+  .item-dia .hora{
+    font-weight:bold;
+    color:var(--marrom-vinho);
+  }
+  .item-dia:nth-child(even) .hora{ color:var(--verde-mato); }
+
+  /* ================= CONTRACAPA ================= */
+  .contracapa{
+    background: var(--creme);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:14mm;
+    text-align:center;
+  }
+  .contracapa .brasao-mini,
+  .contracapa .brasao-cocapa{ width:70mm; margin-bottom:5mm; }
+  .contracapa .lema-final{
+    font-style:italic;
+    font-size:11pt;
+    color:var(--verde-mato);
+    margin-bottom:6mm;
+  }
+  .contracapa .caixa-contato{
+    border-top:1pt solid var(--dourado);
+    border-bottom:1pt solid var(--dourado);
+    padding:4mm 0;
+    width:100%;
+    margin-bottom:6mm;
+  }
+  .contracapa .caixa-contato .nome-centro{
+    font-family:"DejaVu Serif", serif;
+    font-weight:bold;
+    font-size:11pt;
+    letter-spacing:1px;
+    color:var(--marrom-vinho);
+    margin-bottom:2mm;
+  }
+  .contracapa .caixa-contato div{
+    font-size:8.6pt;
+    line-height:1.6;
+    color:var(--tinta);
+  }
+  .contracapa .redes{
+    font-size:8pt;
+    color:var(--cinza-nota);
+    letter-spacing:.3px;
+  }
+  .contracapa .participe{
+    background:var(--creme-escuro);
+    border:0.75pt dashed var(--verde-mato);
+    padding:3mm 4mm;
+    font-size:8.3pt;
+    font-style:italic;
+    color:var(--verde-mato);
+    margin-top:6mm;
+  }
+
+  /* ---------- passagem bíblica (pág. 3) ---------- */
+  .titulo-biblia{
+    font-family:"Utopia","DejaVu Serif",serif;
+    font-weight:bold;
+    font-size:18pt;
+    text-align:center;
+    margin:0 0 1mm 0;
+    color:var(--tinta);
+  }
+  .ref-biblia{
+    font-family:"Utopia","Georgia",serif;
+    font-style:italic;
+    text-align:center;
+    font-size:9.5pt;
+    color:var(--verde-mato);
+    margin-bottom:4mm;
+  }
+  .corpo-biblia{
+    font-family:"Utopia","Georgia","Liberation Serif",serif;
+    column-count:2;
+    column-gap:7mm;
+    column-rule:0.5pt solid var(--dourado-claro);
+  }
+  .corpo-biblia .versiculo-abertura{
+    margin:0 0 2.5mm 0;
+    text-align:justify;
+    font-size:13pt;
+    line-height:14pt;
+    break-inside:avoid;
+  }
+  .corpo-biblia .numero-capitulo{
+    font-weight:bold;
+    font-size:30pt;
+    line-height:0.7;
+    float:left;
+    padding-right:2mm;
+    color:var(--marrom-vinho);
+  }
+  .corpo-biblia .numero-versiculo{
+    font-weight:bold;
+    font-size:13pt;
+    padding-right:1mm;
+    color:var(--tinta);
+  }
+  .corpo-biblia .versiculo-prosa{
+    margin:0 0 2.5mm 0;
+    text-align:justify;
+    font-size:13pt;
+    line-height:14pt;
+    break-inside:avoid;
+  }
+  .corpo-biblia .versiculo-poesia{
+    font-size:13pt;
+    line-height:14pt;
+    margin:0 0 2mm 0;
+    break-inside:avoid;
+  }
+  .corpo-biblia .versiculo-poesia .linha-a{ display:inline; margin-left:0; }
+  .corpo-biblia .versiculo-poesia .linha-b{ display:block; margin-left:6mm; margin-top:0.5mm; }
+
+  .notas-rodape-biblia{
+    font-family:"Utopia","Georgia",serif;
+    font-size:8pt;
+    line-height:1.5;
+    color:var(--cinza-nota);
+    font-style:italic;
+    margin-top:3mm;
+    padding-top:2mm;
+    border-top:0.5pt solid var(--cinza-nota);
+  }
+  .notas-rodape-biblia .ref-nota{
+    font-weight:bold;
+    font-style:normal;
+    margin-right:1mm;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ======================= PÁGINA 1 — CAPA ======================= -->
+<div class="pagina capa">
+  <div class="mancheta">
+    <div class="de">Jornal</div>
+    <h1>CRISTO&nbsp;REI</h1>
+    <div class="sub">Informativo do Centro de Estudo Ave Maria</div>
+  </div>
+
+  <div class="CristoRei-capa"><img src="../assets/cristorei.png" alt="imagem Cristo Rei"></div>
+
+  <div class="info-edicao">Ano I &nbsp;·&nbsp; Edição nº 02 &nbsp;·&nbsp; Alegrete, Outubro de 2026</div>
+
+  <div class="chamadas">
+    <div class="titulo-chamadas">Nesta edição</div>
+    <ul>
+      <li>O HOMEM INTERIOR</li>
+      <li>A VIDA ESCONDIDA</li>
+      <li>AS IDADES DA VIDA INTERIOR</li>
+      <li>HALLOWEEN</li>
+      <li>O IMAGINÁRIO INFANTIL</li>
+    </ul>
+  </div>
+
+  <div class="rodape-capa">
+    <div class="lema">Idem Velle et Idem Nolle</div>
+    <div class="endereco">Centro de Estudo Ave Maria — Paróquia Nossa Senhora da Conceição Aparecida — Alegrete/RS</div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 2 — O HOMEM INTERIOR ======================= -->
+<div class="pagina">
+  <div class="interna">
+    <div class="cabecalho-interno">
+      <div class="marca">Jornal Cristo Rei</div>
+      <div class="secao-atual">Vida espiritual</div>
+    </div>
+
+    <div class="corpo-interno">
+      <h2 class="titulo-materia">O HOMEM INTERIOR</h2>
+      <div class="colunas-2">
+        <p>O homem interior, espiritual, é o homem novo: não depende do mundo nem do homem exterior.</p>
+        <p>O homem interior é autônomo, independente de todas as coisas externas à alma. Depende apenas do conhecimento de si e da graça, que é a ação de Deus.</p>
+        <p>O homem interior não depende do homem exterior, mas o ordena.</p>
+        <p>Quase ninguém mais tem um homem interior, porque não o cultiva. Aquilo que as pessoas percebem em si mesmas é o homem exterior, que age quase exclusivamente por meio dos sentidos e da imaginação.</p>
+        <p>O homem interior, que permanece quando excluímos tudo o que é exterior e resta apenas a alma (conforme Santo Agostinho) (ou apenas a percepção do ato da inteligência, conforme Santo Tomás), deve ser cultivado em nós. Ele está perdido e precisa ser reencontrado.</p>
+        <p>Encontramo-lo pelo autoconhecimento, quando percebemos nossa alma, conforme Santa Catarina de Sena e Santo Antão.</p>
+        <p>Pela filosofia, alcançamos o homem interior de forma rudimentar. É pela oração e pelos sacramentos que podemos chegar à sua perfeição: o homem interior restaurado por Cristo.</p>
+        <p>Quanto mais treinamos nossa abstração por meio das MEDITAÇÕES e menos importância damos às coisas do mundo, mais nos aproximamos do nosso homem interior.</p>
+        <p>O homem interior, espiritual, é o homem novo: não depende do mundo nem do homem exterior.</p>
+        <p>Rezem!</p>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <span>2</span>
+      <span>Centro de Estudo Ave Maria</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 3 — A VIDA ESCONDIDA ======================= -->
+<div class="pagina">
+  <div class="interna">
+    <div class="cabecalho-interno">
+      <div class="marca">Jornal Cristo Rei</div>
+      <div class="secao-atual">Vida espiritual</div>
+    </div>
+
+    <div class="corpo-interno">
+      <h2 class="titulo-materia">A VIDA ESCONDIDA</h2>
+      <div class="colunas-2">
+        <p>Pare um pouco, sente-se na cadeira, erga a cabeça e olhe para a frente, para algo real: pode ser um gramado, uma flor, um gato ou qualquer pessoa...</p>
+        <p>Agora, incline a cabeça, apoie os cotovelos nos joelhos e pense nas coisas virtuais que o cercam: vídeos curtos no celular, fotografias digitais, teorias políticas, escândalos de corrupção, ideologias, propagandas e especulações...</p>
+        <p>Esses dois parágrafos parecem abranger tudo: coisas reais e palpáveis e coisas virtuais e invisíveis. Tudo isso existe de alguma forma, mas não é tudo.</p>
+        <p>Há algo que não percebemos de imediato, porque não é tão evidente para nós. Há outra vida que muitos não percebem e que, entretanto, está muito próxima de nós. Há uma vida escondida em nós: temos uma vida interior.</p>
+        <p>Essa vida interior é o nosso bem maior. Na verdade, é tudo o que temos. É por meio dela que realmente podemos dizer: "isto é meu".</p>
+        <p>Se podemos comandar e ordenar alguma coisa, é esta vida escondida. Ela parece tão escondida que só a encontramos no silêncio, afastados do mundo. Entre no seu quarto, feche a porta e, no silêncio, encontrará algo que, na verdade, não está tão escondido assim: está ali, querendo mostrar-se, como que em dores de parto, querendo vir à luz. É a vida interior que se revela.</p>
+        <p>Ao encontrá-la, contemple-a, concentre-se em suas entranhas e mergulhe nas profundezas da sua alma.</p>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <span>3</span>
+      <span>Centro de Estudo Ave Maria</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 4 — A VIDA ESCONDIDA (CONTINUAÇÃO) ======================= -->
+<div class="pagina">
+  <div class="interna">
+    <div class="cabecalho-interno">
+      <div class="marca">Jornal Cristo Rei</div>
+      <div class="secao-atual">Vida espiritual</div>
+    </div>
+
+    <div class="corpo-interno">
+      <h2 class="titulo-materia">A VIDA ESCONDIDA</h2>
+      <div class="assinatura-materia">Continuação</div>
+      <div class="colunas-2">
+        <p>Pergunte quem você é e quão malicioso é. Peça que sua vida interior lhe mostre todos os seus erros. Seja sincero e não tenha medo, pois, aparentemente, é uma conversa entre você e você mesmo.</p>
+        <p>Mas e o bem que fiz? Não há bem humano sem mácula, malícia ou segundas intenções. Então, esqueça-o e não caia no erro da vanglória, achando-se um herói no teatro da vida humana.</p>
+        <p>Nossa vida interior é um diamante. É a única coisa que pode nos revelar quem somos e nos colocar no lugar que realmente nos cabe e merecemos. É essa vida escondida que nos lembra de algo que muitas vezes esquecemos: "Tudo o que fiz fui eu mesmo que fiz".</p>
+        <p>Essa vida escondida, essa vida interior, é o nosso bem maior. É tão valiosa que constitui o único meio que temos de falar com Deus. Na verdade, quando, no silêncio, aparentemente falamos conosco, estamos falando com Deus. Estamos orando.</p>
+        <p>Encontre a vida escondida, e você se conhecerá.</p>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <span>4</span>
+      <span>Centro de Estudo Ave Maria</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 5 — AS IDADES DA VIDA INTERIOR ======================= -->
+<div class="pagina">
+  <div class="interna">
+    <div class="cabecalho-interno">
+      <div class="marca">Jornal Cristo Rei</div>
+      <div class="secao-atual">Vida espiritual</div>
+    </div>
+
+    <div class="corpo-interno">
+      <h2 class="titulo-materia">AS IDADES DA VIDA INTERIOR</h2>
+      <div class="colunas-2">
+        <p>A vida espiritual tem três idades, que correspondem, mais ou menos, às idades biológicas.</p>
+        <p>A primeira vai até a adolescência ou o início da vida adulta. É a via purgativa, que se estende até a conversão. Em geral, leva vinte ou trinta anos para se completar.</p>
+        <p>A segunda corresponde à vida adulta plena, entre os 40 e os 60 anos. É a via iluminativa: vai do primeiro grau de oração (oração vocal) ao quarto (oração de simplicidade). Se mantivermos a constância e a hypomonè, essa fase leva, em média, vinte ou trinta anos.</p>
+        <p>A terceira é a idade unitiva, própria do homem maduro, que atravessou a porta estreita, fixa o olhar no Nome de Cristo, recebe os rios de água viva e entra na contemplação.</p>
+        <p>Assim, não se aflijam com a demora dos resultados, pois Deus não está de costas. Ele age por meio da graça. De graça em graça, crescemos, amadurecemos e formamos Cristo em nós.</p>
+        <p>Esperem um pouquinho, mais um pouquinho, só mais um pouquinho: tenham esperança.</p>
+        <p>Esse é o caminho ordinário da salvação. Começa com a graça santificante recebida no Batismo e se destina a todos os que creem no Verbo Encarnado.</p>
+        <p>Começa pela fé e pela caridade da Trindade e se mantém ao longo do tempo pela esperança, que aperfeiçoa a fé quando fixamos os olhos da alma em Cristo.</p>
+        <p>Rezem! Essa é a única maneira de fazer nosso homem interior crescer, com a ajuda dos sacramentos.</p>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <span>5</span>
+      <span>Centro de Estudo Ave Maria</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 6 — HALLOWEEN ======================= -->
+<div class="pagina">
+  <div class="interna">
+    <div class="cabecalho-interno">
+      <div class="marca">Jornal Cristo Rei</div>
+      <div class="secao-atual">Reflexão</div>
+    </div>
+
+    <div class="corpo-interno">
+      <div class="assinatura-materia">Reflexão</div>
+      <h2 class="titulo-materia">HALLOWEEN</h2>
+      <div class="colunas-2">
+        <p>Sempre o belo é melhor e mais oportuno!</p>
+        <p>Por isso, o Halloween, que, antes de qualquer coisa, prioriza o feio, o horrendo e o animalesco, concorre para o mal.</p>
+        <p>Além disso, a divulgação da magia, do oculto, do esotérico, da bruxaria, do animismo e, por fim, do satanismo, propositalmente embutida nessa festa, também concorre para o mal.</p>
+        <p>Essa tradição não tem nada de inocente, exceto pelas suas vítimas, que são principalmente as crianças.</p>
+        <p>Pais, professores e escolas inteiras contribuem para alastrar esse mal entre filhos e alunos: muitas vezes por ignorarem aquilo que deveriam saber; outras, na maioria dos casos, por negligenciarem o perigo, o que torna a culpa ainda maior.</p>
+        <p>Quando se pinta uma criança e se veste nela uma fantasia de diabinho, zumbi, lobisomem ou bruxinha, dizendo "tão bonitinhos...", está-se fazendo uma oferenda a Satanás. É preciso ser muito inteligente para perceber isso? Não. Qualquer um consegue perceber esse mal.</p>
+        <p>Assim, sem dúvida, essa festa funciona como uma porta de entrada para a ação do maligno na vida das nossas crianças e na nossa. E o futuro pode ser sombrio e perturbador...</p>
+        <p>Pela intercessão de Nossa Senhora, Cristo, protegei nossas crianças!</p>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <span>6</span>
+      <span>Centro de Estudo Ave Maria</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 7 — O IMAGINÁRIO INFANTIL ======================= -->
+<div class="pagina">
+  <div class="interna">
+    <div class="cabecalho-interno">
+      <div class="marca">Jornal Cristo Rei</div>
+      <div class="secao-atual">Formação</div>
+    </div>
+
+    <div class="corpo-interno">
+      <h2 class="titulo-materia">O IMAGINÁRIO INFANTIL</h2>
+      <div class="colunas-2">
+        <p>O imaginário infantil é o conjunto de memórias e símbolos que as crianças criam a partir do mundo e que acabam moldando sua forma de pensar e compreender a realidade.</p>
+        <p>Esse imaginário precisa ser povoado por símbolos, narrativas e modelos de santidade, mesmo que a razão das crianças ainda não esteja plenamente madura para compreendê-los, sobretudo no que diz respeito às realidades divinas.</p>
+        <p>Ao ouvirem histórias dos santos, dos anjos e do próprio Jesus Cristo, as crianças, a partir do imaginário que construíram, concebem o invisível e podem vislumbrar, desde já, o Céu.</p>
+        <p>É necessário dar atenção e importância àquilo que está sendo guardado no imaginário de nossas crianças.</p>
+        <p>É fundamental perceber que é nossa responsabilidade, enquanto pais, mestres e catequistas, ajudar nossas crianças a discernir o certo do errado e a cultivar, de maneira natural e profunda, a virtude da fé em cada um dos pequeninos.</p>
+      </div>
+    </div>
+
+    <div class="rodape-interno">
+      <span>7</span>
+      <span>Centro de Estudo Ave Maria</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================= PÁGINA 8 — CONTRACAPA ======================= -->
+<div class="pagina contracapa">
+  <div class="brasao-mini"><img src="../assets/brasao.svg" alt="Brasão do CEAM" style="width:100%;"></div>
+  <div class="lema-final">“Idem Velle et Idem Nolle”</div>
+
+  <div class="caixa-contato">
+    <div class="nome-centro">Centro de Estudo Ave Maria</div>
+    <div>
+      Paróquia Nossa Senhora da Conceição Aparecida<br>
+      Alegrete — Rio Grande do Sul<br>
+    </div>
+  </div>
+
+  <div class="redes">@centrodeestudoave_</div>
+
+  <div class="participe">Participe: os cursos e encontros do Centro de Estudo Ave Maria são abertos a toda a comunidade paroquial.</div>
+</div>
+
+
+
+</body></html>
